@@ -27,7 +27,7 @@
   --heavy: "Anton", Impact, "Arial Narrow", sans-serif;
   --max: 1160px;
   --r: 18px;
-  color-scheme: light;
+  color-scheme: only light;
 }
 
 * { box-sizing: border-box; }
