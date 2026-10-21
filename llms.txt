@@ -1,0 +1,20 @@
+# SWELL Vending
+
+> SWELL makes vending machines that blend fresh protein smoothies and shakes to order. A SWELL cup is 16 oz with 30g protein; a SWOLL cup is 24 oz with 50g protein. Machines are placed in gyms, high schools, colleges, hotels and offices, starting in Utah County, Utah.
+
+## Key facts
+- Machine size: 16.9 in wide x 34.3 in deep x 76.2 in tall (428 x 872 x 1935 mm), on casters
+- Ordering by touchscreen, tap-to-pay for cards and phone wallets, cup window at 36.4 in
+- Programs: Host (free placement, revenue share), Own (purchase), Lease (monthly)
+- Shake flavors: Chocolate, Cookies & Cream, Vanilla, Strawberry Shortcake, Peanut Butter Cup, Cake Batter
+- Smoothie flavors: Mango, Pina Colada, Berry Bliss, Peach Ring, Sour Apple, Blue Raspberry
+- Every cup has collagen peptides, colostrum and iron. Contains milk.
+
+## Pages
+- [Home](https://pdrayday.github.io/drinkswell/)
+- [The machine](https://pdrayday.github.io/drinkswell/machine.html)
+- [Menu](https://pdrayday.github.io/drinkswell/menu.html)
+- [Locations](https://pdrayday.github.io/drinkswell/locations.html)
+- [About](https://pdrayday.github.io/drinkswell/about.html)
+- [FAQ](https://pdrayday.github.io/drinkswell/faq.html)
+- [Refer a location](https://pdrayday.github.io/drinkswell/refer.html)
