@@ -43,6 +43,7 @@ def head(title, desc, path):
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="{SITE_URL}{'' if path == 'index.html' else path}">
 <meta name="theme-color" content="#f8e7eb">
+<meta name="color-scheme" content="light dark">
 <meta property="og:type" content="website"><meta property="og:site_name" content="SWELL Vending"><meta property="og:title" content="{title}"><meta property="og:description" content="{html.escape(desc)}"><meta property="og:image" content="{SITE_URL}img/cups/swell_mango.webp">
 <link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32.png"><link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">
 <link rel="preload" href="fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
