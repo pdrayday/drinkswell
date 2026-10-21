@@ -1,0 +1,46 @@
+<svg class="dims-art" viewBox="20 0 680 690" role="img" aria-labelledby="dim-t dim-d" xmlns="http://www.w3.org/2000/svg">
+  <title id="dim-t">SWELL machine dimensions</title>
+  <desc id="dim-d">Front: 16.9 inches wide. Side: 34.3 inches deep. Height: 76.2 inches on casters. Screen starts 51.5 inches up, the cup window sits at 36.4 inches and the tap-to-pay reader at 30.6 inches.</desc>
+  <g font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" fill="currentColor">
+    <!-- front elevation: 428 x 1935 mm at 0.3 -->
+    <g transform="translate(90 60)">
+      <rect width="128.4" height="553.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <rect x="33" y="84.3" width="62.1" height="103.5" rx="4" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M29 231.3h70.5l-6.6 72H35.6z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <rect x="54.6" y="337.8" width="19.2" height="19.2" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <rect y="553.5" width="128.4" height="0" stroke="currentColor"/>
+      <g fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="16" cy="571" r="9"/><circle cx="112" cy="571" r="9"/></g>
+      <path d="M-10 580.5h148.4" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3"/>
+      <!-- width -->
+      <path d="M0 -26h128.4M0 -32v12M128.4 -32v12" stroke="currentColor" stroke-width="1"/>
+      <text x="64.2" y="-34" text-anchor="middle" font-size="13" font-weight="700">16.9 in</text>
+      <text x="64.2" y="-50" text-anchor="middle" font-size="10.5" letter-spacing="1.5" opacity=".7">FRONT</text>
+      <!-- heights from floor (580.5) -->
+      <g stroke="currentColor" stroke-width="1" stroke-dasharray="2 3" opacity=".75">
+        <path d="M33 187.8H-28"/><path d="M29 303.3H-28"/><path d="M54.6 347.4H-28"/>
+      </g>
+      <g font-size="11.5" text-anchor="end">
+        <text x="-32" y="191.8">51.5 in</text><text x="-32" y="307.3">36.4 in</text><text x="-32" y="351.4">30.6 in</text>
+      </g>
+      <g font-size="10" opacity=".75">
+        <text x="140" y="140">screen</text><text x="140" y="270">cup window</text><text x="140" y="352">tap to pay</text>
+      </g>
+    </g>
+    <!-- side elevation: 872 x 1935 mm at 0.3 -->
+    <g transform="translate(320 60)">
+      <rect width="261.6" height="553.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M130.8 12v530" stroke="currentColor" stroke-width="1" opacity=".6"/>
+      <rect x="135" y="246" width="7" height="33" rx="2" fill="currentColor" opacity=".7"/>
+      <circle cx="125" cy="262" r="3" fill="currentColor" opacity=".7"/>
+      <g fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="18" cy="571" r="9"/><circle cx="244" cy="571" r="9"/></g>
+      <path d="M-10 580.5h281.6" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3"/>
+      <path d="M0 -26h261.6M0 -32v12M261.6 -32v12" stroke="currentColor" stroke-width="1"/>
+      <text x="130.8" y="-34" text-anchor="middle" font-size="13" font-weight="700">34.3 in</text>
+      <text x="130.8" y="-50" text-anchor="middle" font-size="10.5" letter-spacing="1.5" opacity=".7">SIDE · SERVICE DOORS</text>
+      <!-- overall height -->
+      <path d="M290 0v580.5M284 0h12M284 580.5h12" stroke="currentColor" stroke-width="1"/>
+      <text x="300" y="296" font-size="13" font-weight="700">76.2 in</text>
+      <text x="300" y="312" font-size="10" opacity=".75">on casters</text>
+    </g>
+  </g>
+</svg>
