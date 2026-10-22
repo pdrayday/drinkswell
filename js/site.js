@@ -102,5 +102,16 @@
     });
   });
 
+  // Shakes / Smoothies line toggle (switches the theme like the main Swell site)
+  var root = document.documentElement;
+  var setLine = function (l, save) {
+    root.setAttribute('data-line', l);
+    $$('[data-line-btn]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-line-btn') === l)); });
+    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', l === 'smoothies' ? '#fbf0cf' : '#f8e7eb');
+    if (save) { try { localStorage.setItem('swell-line', l); } catch (e) {} }
+  };
+  setLine(root.getAttribute('data-line') || 'shakes', false);
+  $$('[data-line-btn]').forEach(function (b) { b.addEventListener('click', function () { setLine(b.getAttribute('data-line-btn'), true); }); });
+
   var yr = $('#yr'); if (yr) yr.textContent = new Date().getFullYear();
 })();
