@@ -92,7 +92,8 @@ FOOT = f'''</main>
     <p>© <span id="yr">2026</span> Swell.</p>
   </div>
 </div></footer>
-<nav class="mbar-nav" aria-label="Find a Swell machine"><a class="mbar" href="locations.html"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></i><span class="p"><b>Find a machine</b><span>9 in Utah County</span></span><span class="go" aria-hidden="true">Map <span>→</span></span></a></nav>
+<nav class="mbar-nav" aria-label="Find a Swell machine"><a class="mbar pre" id="mbar" href="index.html#find"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></i><span class="p"><b>Find a machine</b><span id="mb-s">9 in Utah County</span></span><span class="go" aria-hidden="true">Map <span>→</span></span></a></nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="js/site.js"></script>
 </body>
 </html>
@@ -245,6 +246,51 @@ def request_block(heading='Get a SWELL machine', sub='Tell us about your spot. W
 </div></section>'''
 
 
+MDATA = [
+    {"id": "provo", "city": "Provo", "type": "shopping", "address": "1200 Towne Centre Blvd", "csz": "Provo, UT 84601", "lat": 40.2173, "lng": -111.6646, "venue": "Shopping center"},
+    {"id": "orem", "city": "Orem", "type": "shopping", "address": "575 E University Pkwy", "csz": "Orem, UT 84097", "lat": 40.2767, "lng": -111.6829, "venue": "Shopping center"},
+    {"id": "lehi", "city": "Lehi", "type": "gym", "address": "1230 E Main St", "csz": "Lehi, UT 84043", "lat": 40.3887, "lng": -111.8279, "venue": "Gym"},
+    {"id": "af", "city": "American Fork", "type": "gym", "address": "51 E 100 N", "csz": "American Fork, UT 84003", "lat": 40.3786, "lng": -111.7946, "venue": "Gym"},
+    {"id": "pg", "city": "Pleasant Grove", "type": "school", "address": "Address coming soon", "csz": "Pleasant Grove, UT 84062", "lat": 40.364, "lng": -111.738, "venue": "High school"},
+    {"id": "em", "city": "Eagle Mountain", "type": "gym", "address": "Address coming soon", "csz": "Eagle Mountain, UT 84005", "lat": 40.3141, "lng": -112.0069, "venue": "Gym"},
+    {"id": "ss", "city": "Saratoga Springs", "type": "gym", "address": "Address coming soon", "csz": "Saratoga Springs, UT 84045", "lat": 40.3492, "lng": -111.9047, "venue": "Gym"},
+    {"id": "sv", "city": "Springville", "type": "school", "address": "Address coming soon", "csz": "Springville, UT 84663", "lat": 40.1652, "lng": -111.6107, "venue": "High school"},
+    {"id": "sf", "city": "Spanish Fork", "type": "hotel", "address": "Address coming soon", "csz": "Spanish Fork, UT 84660", "lat": 40.115, "lng": -111.655, "venue": "Hotel"},
+]
+for _m in MDATA: _m["photo"] = "img/machine_thumb.webp"
+CHEV = '<svg class="chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+
+
+def finder_section(pad_top='10px'):
+    import json
+    cards = ''.join(
+        f'<button type="button" class="mloc" data-id="{m["id"]}" data-type="{m["type"]}" data-q="{html.escape((m["city"] + " " + m["address"] + " " + m["csz"] + " " + m["venue"]).lower())}">'
+        f'<img src="{m["photo"]}" alt="Swell vending machine in {html.escape(m["city"])}" width="112" height="140" loading="lazy">'
+        f'<span class="mt"><b>{html.escape(m["city"])}</b><span class="dist" data-venue="{m["venue"]}">{m["venue"]}</span><span class="addr">{html.escape(m["address"])}<br>{html.escape(m["csz"])}</span></span>{CHEV}</button>'
+        for m in MDATA)
+    return f'''<section style="padding-top:{pad_top}" id="find" class="find-sec"><div class="wrap">
+<link rel="stylesheet" href="vendor/maplibre-gl.css">
+<div class="finder2">
+  <div class="fside">
+    <div class="fhead"><h2>Find a Swell</h2><p>Utah County · <span id="fcount">{len(MDATA)}</span> machines</p></div>
+    <div class="ffilters filters" role="group" aria-label="Location type"><button type="button" class="press" aria-pressed="true" data-mf="all">All</button><button type="button" class="press" aria-pressed="false" data-mf="gym">Gyms</button><button type="button" class="press" aria-pressed="false" data-mf="school">Schools</button><button type="button" class="press" aria-pressed="false" data-mf="hotel">Hotels</button><button type="button" class="press" aria-pressed="false" data-mf="shopping">Shopping</button></div>
+    <button type="button" class="btn sm alt flocate" id="flocate2"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Sort by distance from me</button>
+    <div class="flist" id="flist">{cards}</div>
+    <p class="small fnote">Sample locations for layout. Replace with live machine data before launch.</p>
+  </div>
+  <div class="fmapwrap">
+    <div id="fmap" data-lib="vendor/maplibre-gl.js" role="region" aria-label="Map of Swell vending machines in Utah County"></div>
+    <form class="fsearch" id="fsearch" role="search"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <label class="sr" for="fq">Search by city, address or ZIP</label><input id="fq" type="search" placeholder="Search city, address or ZIP" autocomplete="off"><button type="button" id="fclear" aria-label="Clear search">×</button></form>
+    <div class="fctl"><button type="button" id="fzin" aria-label="Zoom in">+</button><button type="button" id="fzout" aria-label="Zoom out">−</button></div>
+    <button type="button" class="fctl fme" id="flocate" aria-label="Show my location"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="3.5" fill="currentColor"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12H5M19 12h3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <p class="fnotiles" hidden>The map couldn't load here. The list still works, and Directions opens Google Maps.</p>
+  </div>
+</div>
+<script type="application/json" id="mdata">{json.dumps(MDATA)}</script>
+</div></section>'''
+
+
 LOCS = [
     ('Provo', 'shopping', 'Shopping center', '1200 Towne Centre Blvd', 'Provo, UT 84601'),
     ('Orem', 'shopping', 'Shopping center', '575 E University Pkwy', 'Orem, UT 84097'),
@@ -336,11 +382,8 @@ index = page('index.html', 'SWELL Vending', 'SWELL vending machines blend fresh 
   {ESTIMATOR}
 </div></section>
 
-<section class="band-blush"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">Already blending</p><h2>Find a SWELL machine near you.</h2></div>
-  <ul class="locs">{''.join(loc_li(l) for l in LOCS[:3])}</ul>
-  <p style="margin-top:22px"><a class="btn ghost arrow" href="locations.html">All locations</a></p>
-</div></section>
+<section class="mach-intro" id="machines"><div class="wrap"><div class="sec-head"><p class="eyebrow">Already blending</p><h2>Find a Swell machine</h2><p class="lead">You'll find SWELL machines in gyms, high schools, hotels and shopping centers around Utah County, blending shakes and smoothies to order.</p></div></div></section>
+{finder_section()}
 
 <section class="drinkswell"><div class="wrap">
   <div class="sec-head"><p class="eyebrow">#drinkswell</p><h2>Post your Swell.</h2><p class="lead">Gym bags, school hallways, the line at the machine. Tag <b>@drinkswell</b> and use <b>#drinkswell</b>, and your post could end up here.</p></div>
@@ -447,22 +490,7 @@ page('locations.html', 'Find a SWELL Machine', 'SWELL protein smoothie vending m
   <p class="lead">Machines in gyms, high schools, hotels and shopping centers around Utah County, with more on the way.</p>
 </div></section>
 
-<section style="padding-top:0"><div class="wrap">
-  <div class="loc-tools">
-    <div class="chips" id="loc-chips" role="group" aria-label="Filter by type">
-      <button type="button" data-f="all" aria-pressed="true">All</button>
-      <button type="button" data-f="gym" aria-pressed="false">Gyms</button>
-      <button type="button" data-f="school" aria-pressed="false">Schools</button>
-      <button type="button" data-f="hotel" aria-pressed="false">Hotels</button>
-      <button type="button" data-f="shopping" aria-pressed="false">Shopping</button>
-    </div>
-    <label class="search" for="loc-q"><span class="sr">Search by city or ZIP</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="loc-q" type="search" placeholder="Search by city or ZIP"></label>
-  </div>
-  <p class="small" style="margin-bottom:14px"><span id="loc-count">9</span> machines</p>
-  <ul class="locs" id="locs">{''.join(loc_li(l) for l in LOCS)}</ul>
-  <p class="empty" id="loc-empty" hidden>No machines match that search yet. <a href="machine.html#request">Ask for one at your spot.</a></p>
-  <p class="note-chip" style="margin-top:18px">Sample locations for layout. Replace with live machine data before launch.</p>
-</div></section>
+{finder_section('0')}
 
 <section class="band-ink cta-band"><div class="wrap">
   <h2>Don't see one near you?</h2>
