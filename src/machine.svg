@@ -1,6 +1,6 @@
 <svg class="machine-art" viewBox="0 0 430 920" role="img" aria-labelledby="mach-t mach-d" xmlns="http://www.w3.org/2000/svg">
   <title id="mach-t">SWELL blender vending machine</title>
-  <desc id="mach-d">A slim pink SWELL machine, 17 inches wide and 76 inches tall, with a touchscreen, a cup window and a tap-to-pay reader on the front, and SWELL and SWOLL cups wrapped on the side.</desc>
+  <desc id="mach-d">A slim pink SWELL machine, 17 inches wide and 76 inches tall, with a touchscreen, a cup window and a tap-to-pay reader on the front, and a Berry Bliss smoothie photo wrapped on the side.</desc>
   <defs>
     <linearGradient id="mFront" x1="0" x2="1" y1="0" y2="0">
       <stop offset="0" stop-color="#f6d3dc"/><stop offset=".55" stop-color="#efbccb"/><stop offset="1" stop-color="#e4a3b5"/>
@@ -28,8 +28,9 @@
     <rect width="872" height="1845" fill="url(#mSide)"/>
     <use href="#swell-logo" x="70" y="150" width="730" height="279" fill="#2a121a"/>
     <text x="436" y="520" text-anchor="middle" font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="44" letter-spacing="5" fill="#2a121a">PROTEIN SMOOTHIES &amp; SHAKES</text>
-    <image href="img/cups/swoll_choc_sm.webp" x="380" y="620" width="470" height="787"/>
-    <image href="img/cups/swell_berry_sm.webp" x="40" y="700" width="440" height="736"/>
+    <clipPath id="mSideClip"><rect x="166" y="600" width="540" height="880" rx="34"/></clipPath>
+    <rect x="166" y="600" width="540" height="880" rx="34" fill="#050505"/>
+    <image href="img/menu/berry-bliss.webp" x="176" y="600" width="520" height="878" clip-path="url(#mSideClip)"/>
     <text x="436" y="1610" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="130" fill="#2a121a">30g · 50g</text>
     <text x="436" y="1680" text-anchor="middle" font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="40" letter-spacing="5" fill="#2a121a">FRESH BLENDED IN THE MACHINE</text>
     <path d="M436 40V1760" stroke="#2a121a" stroke-opacity=".22" stroke-width="3"/>
@@ -49,8 +50,8 @@
     <rect x="110" y="281" width="207" height="345" rx="10" fill="url(#mScreen)"/>
     <text x="213.5" y="326" text-anchor="middle" font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="22" letter-spacing="2" fill="#f5ccd6">PICK A BLEND</text>
     <g>
-      <circle cx="152" cy="380" r="26" fill="#7b4c36"/><circle cx="213.5" cy="380" r="26" fill="#f0a2b3"/><circle cx="275" cy="380" r="26" fill="#d8d0c6"/>
-      <circle cx="152" cy="450" r="26" fill="#e58a3a"/><circle cx="213.5" cy="450" r="26" fill="#b23a6e"/><circle cx="275" cy="450" r="26" fill="#f1d98e"/>
+      <circle cx="152" cy="380" r="26" fill="#efe2c6"/><circle cx="213.5" cy="380" r="26" fill="#7b4c36"/><circle cx="275" cy="380" r="26" fill="#d8d0c6"/>
+      <circle cx="152" cy="450" r="26" fill="#f2a83a"/><circle cx="213.5" cy="450" r="26" fill="#c8406a"/><circle cx="275" cy="450" r="26" fill="#f1e6b0"/>
     </g>
     <rect x="132" y="510" width="72" height="40" rx="20" fill="#f5ccd6"/>
     <text x="168" y="537" text-anchor="middle" font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="18" fill="#2a121a">30g</text>
@@ -62,7 +63,7 @@
     <text x="214" y="735" text-anchor="middle" font-family="Instrument Sans, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="22" letter-spacing="4" fill="#2a121a">FRESH BLENDED</text>
     <path d="M84 759h260l-24 264H108z" fill="#2a121a"/>
     <path d="M96 771h236l-22 240H118z" fill="url(#mWin)"/>
-    <g clip-path="url(#mWinClip)"><image href="img/cups/swell_mango_sm.webp" x="160" y="770" width="128" height="214"/></g>
+    <g clip-path="url(#mWinClip)"><image href="img/menu/mango.webp" x="124" y="768" width="180" height="304"/></g>
     <path d="M118 1011h192" stroke="#f5ccd6" stroke-opacity=".5" stroke-width="3"/>
     <!-- tap to pay -->
     <rect x="176" y="1120" width="76" height="76" rx="14" fill="#2a121a"/>

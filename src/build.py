@@ -13,28 +13,32 @@ SPRITE = f'<svg width="0" height="0" style="position:absolute" aria-hidden="true
 LOGO = '<svg class="logo" viewBox="0 0 2496 954" aria-hidden="true"><use href="#swell-logo"/></svg>'
 
 SHAKES = [
-    ('choc', 'Chocolate', 'Dark cocoa, thick like a drive-thru shake', '#7b4c36'),
-    ('cc', 'Cookies & Cream', 'Cookie crumble in sweet cream', '#d8d0c6'),
-    ('van', 'Vanilla', 'Vanilla bean, the one that goes with everything', '#efe2c6'),
-    ('straw', 'Strawberry Shortcake', 'Strawberry milkshake with a shortcake finish', '#f0a2b3'),
-    ('pb', 'Peanut Butter Cup', 'Peanut butter and milk chocolate', '#c99159'),
-    ('cake', 'Cake Batter', 'Birthday cake with sprinkles', '#f3e1c8'),
+    ('vanilla', 'Vanilla', 'Vanilla bean, the one that goes with everything'),
+    ('chocolate', 'Chocolate', 'Dark cocoa, thick like a drive-thru shake'),
+    ('cookies-cream', 'Cookies & Cream', 'Cookie crumble in sweet cream'),
 ]
 SMOOTHIES = [
-    ('mango', 'Mango', 'Ripe mango, bright and creamy', '#f0a35a'),
-    ('pina', 'Pina Colada', 'Pineapple and coconut', '#f1d98e'),
-    ('berry', 'Berry Bliss', 'Strawberry, raspberry and blueberry', '#c45685'),
-    ('peach', 'Peach Ring', 'The gummy candy, with protein', '#f3a27f'),
-    ('apple', 'Sour Apple', 'Tart green apple', '#a6cf55'),
-    ('blue', 'Blue Raspberry', 'Blue raspberry slush, made creamy', '#6aa8e2'),
+    ('mango', 'Mango', 'Ripe mango, bright and creamy'),
+    ('berry-bliss', 'Berry Bliss', 'Strawberry, raspberry, blueberry and blackberry'),
+    ('pina-colada', 'Pina Colada', 'Pineapple and coconut'),
 ]
+
+SOCIAL = [
+    ('Instagram', 'https://www.instagram.com/drinkswell', '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/>'),
+    ('TikTok', 'https://www.tiktok.com/@drinkswell', '<path d="M14.5 3v11.2a3.6 3.6 0 1 1-3.6-3.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M14.5 3c.4 2.6 2.2 4.4 5 4.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'),
+    ('YouTube', 'https://www.youtube.com/@drinkswell', '<rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.2 9.2v5.6l4.8-2.8z" fill="currentColor"/>'),
+    ('Facebook', 'https://www.facebook.com/drinkswell', '<path d="M13.6 21v-7.6h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5H17V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8.2v3h2.6V21z" fill="currentColor"/>'),
+    ('X', 'https://x.com/drinkswell', '<path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>'),
+]
+SOCIAL_HTML = '<ul class="social" aria-label="Swell on social media">' + ''.join(
+    f'<li><a href="{u}" target="_blank" rel="noopener" aria-label="Swell on {n}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">{p}</svg></a></li>' for n, u, p in SOCIAL) + '</ul>'
 
 NAV = [('machine.html', 'The machine'), ('menu.html', 'Menu'), ('locations.html', 'Locations'), ('about.html', 'About'), ('faq.html', 'FAQ')]
 
 
 def head(title, desc, path):
     return f'''<!doctype html>
-<html lang="en">
+<html lang="en" data-line="shakes">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -44,11 +48,12 @@ def head(title, desc, path):
 <link rel="canonical" href="{SITE_URL}{'' if path == 'index.html' else path}">
 <meta name="theme-color" content="#f8e7eb">
 <meta name="color-scheme" content="light dark">
-<meta property="og:type" content="website"><meta property="og:site_name" content="SWELL Vending"><meta property="og:title" content="{title}"><meta property="og:description" content="{html.escape(desc)}"><meta property="og:image" content="{SITE_URL}img/cups/swell_mango.webp">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SWELL Vending"><meta property="og:title" content="{title}"><meta property="og:description" content="{html.escape(desc)}"><meta property="og:image" content="{SITE_URL}img/menu/shakes.webp">
 <link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32.png"><link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">
 <link rel="preload" href="fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
+<script>try{{var l=localStorage.getItem("swell-line");if(l==="smoothies"||l==="shakes")document.documentElement.setAttribute("data-line",l)}}catch(e){{}}</script>
 </head>
 <body>
 {SPRITE}
@@ -58,8 +63,10 @@ def head(title, desc, path):
 def header(active):
     links = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if h == active else ""}>{t}</a>' for h, t in NAV)
     return f'''<a class="sr" href="#main">Skip to content</a>
+<div class="announce"><div class="wrap"><p>Now placing SWELL machines in Utah County gyms, schools and hotels. <a href="machine.html#request">Get one</a></p></div></div>
 <header class="top"><div class="wrap">
   <a class="brand" href="index.html" aria-label="SWELL Vending home">{LOGO}<span class="tag">Vending</span></a>
+  <div class="linetog" role="group" aria-label="Show shakes or smoothies"><button type="button" data-line-btn="shakes" aria-pressed="true">Shakes</button><button type="button" data-line-btn="smoothies" aria-pressed="false">Smoothies</button></div>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span></span><span></span></button>
   <nav class="nav" id="nav" aria-label="Main">{links}<a class="btn" href="machine.html#request">Get a machine</a></nav>
 </div></header>
@@ -71,53 +78,52 @@ FOOT = f'''</main>
 <footer class="site-foot"><div class="wrap">
   <div class="cols">
     <div class="foot-brand">
-      <div class="pair">{LOGO}<span class="swoll-word">SWOLL</span></div>
-      <p class="small">Protein smoothie and shake vending machines for gyms, schools, hotels and offices. Based in Utah County, Utah.</p>
+      <a href="index.html" aria-label="Swell home">{LOGO}</a>
+      <p class="small">Protein shakes and smoothies, blended fresh in SWELL machines. Made in Utah County.</p>
     </div>
     <div><h4>Machines</h4><ul><li><a href="machine.html">The machine</a></li><li><a href="machine.html#programs">Host, own or lease</a></li><li><a href="machine.html#estimate">Earnings estimate</a></li><li><a href="machine.html#request">Request a site survey</a></li></ul></div>
-    <div><h4>Drinks</h4><ul><li><a href="menu.html">Menu</a></li><li><a href="menu.html#sizes">SWELL vs SWOLL</a></li><li><a href="locations.html">Find a machine</a></li></ul></div>
-    <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="refer.html">Refer a location</a></li></ul></div>
+    <div><h4>Swell</h4><ul><li><a href="menu.html">Menu</a></li><li><a href="locations.html">Find a machine</a></li><li><a href="about.html">About</a></li></ul></div>
+    <div><h4>Help</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="machine.html#request">Host a machine</a></li><li><a href="refer.html">Refer a location</a></li></ul></div>
   </div>
+  <div class="fsocial">{SOCIAL_HTML}<p>Tag <b>@drinkswell</b> and use <b>#drinkswell</b> to get featured.</p></div>
   <div class="fine">
     <p>*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Contains milk.</p>
     <p>Prices, program terms, nutrition and machine locations shown are placeholders until launch.</p>
-    <p>© <span id="yr">2026</span> SWELL. SWELL and SWOLL are trademarks of SWELL.</p>
+    <p>© <span id="yr">2026</span> Swell.</p>
   </div>
 </div></footer>
+<nav class="mbar-nav" aria-label="Find a Swell machine"><a class="mbar" href="locations.html"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></i><span class="p"><b>Find a machine</b><span>9 in Utah County</span></span><span class="go" aria-hidden="true">Map <span>→</span></span></a></nav>
 <script src="js/site.js"></script>
 </body>
 </html>
 '''
 
 
-def cup_li(key, name, note, tint, size='swell', with_note=True):
-    alt = f'{size.upper()} {name} cup'
+def cup_li(key, name, note, kind, with_note=True):
     n = f'<span>{html.escape(note)}</span>' if with_note else ''
-    return f'<li><div class="cup-img" style="--tint:{tint}"><img data-cup="{key}" src="img/cups/{size}_{key}_sm.webp" alt="{html.escape(alt)}" width="300" height="570"></div><b>{html.escape(name)}</b>{n}</li>'
+    w, h = (557, 941) if kind == 'shake' else (512, 864)
+    return f'<li><div class="photo"><img src="img/menu/{key}.webp" alt="Swell {html.escape(name)} protein {kind} in a cup" width="{w}" height="{h}"></div><b>{html.escape(name)}</b>{n}</li>'
 
 
 def cups_block(id_, with_notes=False):
-    sh = ''.join(cup_li(*c, with_note=with_notes) for c in SHAKES)
-    sm = ''.join(cup_li(*c, with_note=with_notes) for c in SMOOTHIES)
-    return f'''<div id="{id_}">
-  <div class="menu-bar">
-    <div class="seg" role="group" aria-label="Cup size" data-size-toggle="{id_}">
-      <button type="button" data-size="swell" aria-pressed="true">SWELL · 30g</button>
-      <button type="button" class="sz-swoll" data-size="swoll" aria-pressed="false"><span class="swoll-word">SWOLL</span>&nbsp;· 50g</button>
-    </div>
-    <p class="small" data-protein>30g protein · 16 oz</p>
-  </div>
-  <div class="cups-label"><h3>Shakes</h3><span>Milkshake flavors</span></div>
-  <ul class="cups">{sh}</ul>
-  <div class="cups-label"><h3>Smoothies</h3><span>Fruit and candy-shop flavors</span></div>
-  <ul class="cups">{sm}</ul>
+    sh = ''.join(cup_li(*c, 'shake', with_note=with_notes) for c in SHAKES)
+    sm = ''.join(cup_li(*c, 'smoothie', with_note=with_notes) for c in SMOOTHIES)
+    return f'''<div id="{id_}" class="menu-lines">
+  <div class="line" data-line-group="shakes"><div class="cups-label"><h3>Protein shakes</h3><span>Milkshake flavors</span></div><ul class="cups">{sh}</ul></div>
+  <div class="line" data-line-group="smoothies"><div class="cups-label"><h3>Protein smoothies</h3><span>Fruit flavors</span></div><ul class="cups">{sm}</ul></div>
+  <p class="small sizes-note">Every flavor comes as a SWELL with 30g of protein or a SWOLL with 50g.</p>
 </div>'''
+
+
+PHOTO_BAND = '''<section class="photo-band" aria-label="Swell shakes and smoothies"><div class="wrap">
+  <img data-line-show="shakes" src="img/menu/shakes.webp" alt="Swell Vanilla, Chocolate and Cookies &amp; Cream protein shakes" width="1672" height="941">
+  <img data-line-show="smoothies" src="img/menu/smoothies.webp" alt="Swell Mango, Berry Bliss and Pina Colada protein smoothies" width="1536" height="1024">
+</div></section>'''
 
 
 def hero_stage():
     return f'''<div class="hero-stage">
   {MACHINE}
-  <div class="hero-cups"><img src="img/cups/swell_straw_sm.webp" alt="SWELL Strawberry Shortcake cup" width="300" height="570"><img src="img/cups/swoll_choc_sm.webp" alt="SWOLL Chocolate cup" width="300" height="570"></div>
   <div class="dimline" aria-hidden="true"><span>76.2<br>in</span></div>
 </div>'''
 
@@ -136,7 +142,6 @@ SIZES = '''<div class="sizes">
       <p class="big">30g<small>PROTEIN</small></p>
       <ul><li>16 oz cup</li><li>Every shake and smoothie flavor</li><li>Collagen, colostrum and iron in every cup*</li><li>$7.99 at the machine</li></ul>
     </div>
-    <img src="img/cups/swell_mango_sm.webp" alt="SWELL Mango cup" width="300" height="570">
   </article>
   <article class="size is-swoll">
     <div class="txt">
@@ -144,7 +149,6 @@ SIZES = '''<div class="sizes">
       <p class="big">50g<small>PROTEIN</small></p>
       <ul><li>24 oz cup</li><li>The same flavors, bigger</li><li>Built for after a hard lift</li><li>$9.99 at the machine</li></ul>
     </div>
-    <img src="img/cups/swoll_choc_sm.webp" alt="SWOLL Chocolate cup" width="300" height="570">
   </article>
 </div>'''
 
@@ -279,12 +283,14 @@ index = page('index.html', 'SWELL Vending', 'SWELL vending machines blend fresh 
     <div class="facts">
       <div><b>17 in</b><span>wide footprint</span></div>
       <div><b>30g · 50g</b><span>protein per cup</span></div>
-      <div><b>12</b><span>shakes and smoothies</span></div>
+      <div><b>6</b><span>shakes and smoothies</span></div>
       <div><b>Tap</b><span>to pay</span></div>
     </div>
   </div>
   {hero_stage()}
 </div></section>
+
+{PHOTO_BAND}
 
 <section class="band-card"><div class="wrap">
   <div class="sec-head"><p class="eyebrow">How a cup gets made</p><h2>From frozen cube to fresh cup, <em>right at the machine.</em></h2></div>
@@ -292,7 +298,7 @@ index = page('index.html', 'SWELL Vending', 'SWELL vending machines blend fresh 
 </div></section>
 
 <section id="menu"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">The menu</p><h2>Twelve flavors. <em>Two sizes.</em></h2><p class="lead">Six milkshake flavors and six smoothies, each in a 30g SWELL or a 50g SWOLL. Switch sizes to see the cups.</p></div>
+  <div class="sec-head"><p class="eyebrow">The menu</p><h2>Three shakes. <em>Three smoothies.</em></h2><p class="lead">Milkshake flavors and fruit smoothies, blended fresh in every machine.</p></div>
   {cups_block('home-cups')}
   <p style="margin-top:28px"><a class="btn ghost arrow" href="menu.html">Full menu</a></p>
 </div></section>
@@ -336,6 +342,11 @@ index = page('index.html', 'SWELL Vending', 'SWELL vending machines blend fresh 
   <p style="margin-top:22px"><a class="btn ghost arrow" href="locations.html">All locations</a></p>
 </div></section>
 
+<section class="drinkswell"><div class="wrap">
+  <div class="sec-head"><p class="eyebrow">#drinkswell</p><h2>Post your Swell.</h2><p class="lead">Gym bags, school hallways, the line at the machine. Tag <b>@drinkswell</b> and use <b>#drinkswell</b>, and your post could end up here.</p></div>
+  {SOCIAL_HTML}
+</div></section>
+
 {request_block()}
 ''')
 
@@ -363,7 +374,7 @@ page('machine.html', 'The SWELL Machine', 'Specs, dimensions and programs for th
   <div class="sec-head"><p class="eyebrow">What comes with it</p><h2>Everything a cup needs.</h2></div>
   <div class="boosts">
     <div><b>Install</b><p class="small">Delivery, setup and a test run. Most installs take a single morning.</p></div>
-    <div><b>SWELL cubes</b><p class="small">Frozen, pre-portioned shake and smoothie cubes for all twelve flavors, plus cups and straws.</p></div>
+    <div><b>SWELL cubes</b><p class="small">Frozen, pre-portioned shake and smoothie cubes for all six flavors, plus cups and straws.</p></div>
     <div><b>Cashless payments</b><p class="small">Cards and phone wallets through the tap-to-pay reader. Sales post daily.</p></div>
     <div><b>Your wrap</b><p class="small">Standard SWELL and SWOLL graphics, or a co-branded wrap with your logo and colors.</p></div>
   </div>
@@ -396,7 +407,7 @@ page('machine.html', 'The SWELL Machine', 'Specs, dimensions and programs for th
 {request_block()}
 ''')
 
-page('menu.html', 'SWELL Menu', 'Twelve protein smoothie and shake flavors blended fresh in SWELL vending machines, in a 30g SWELL or a 50g SWOLL cup.', f'''
+page('menu.html', 'SWELL Menu', 'Protein shakes and smoothies blended fresh in SWELL vending machines, in a 30g SWELL or a 50g SWOLL cup.', f'''
 <section class="page-hero"><div class="wrap">
   <p class="eyebrow">Menu</p>
   <h1>Dessert flavors, <em>real protein.</em></h1>
@@ -580,8 +591,8 @@ open(os.path.join(ROOT, 'llms.txt'), 'w').write(f'''# SWELL Vending
 - Machine size: 16.9 in wide x 34.3 in deep x 76.2 in tall (428 x 872 x 1935 mm), on casters
 - Ordering by touchscreen, tap-to-pay for cards and phone wallets, cup window at 36.4 in
 - Programs: Host (free placement, revenue share), Own (purchase), Lease (monthly)
-- Shake flavors: {', '.join(n for _, n, _, _ in SHAKES)}
-- Smoothie flavors: {', '.join(n for _, n, _, _ in SMOOTHIES)}
+- Shake flavors: {', '.join(n for _, n, _ in SHAKES)}
+- Smoothie flavors: {', '.join(n for _, n, _ in SMOOTHIES)}
 - Every cup has collagen peptides, colostrum and iron. Contains milk.
 
 ## Pages
