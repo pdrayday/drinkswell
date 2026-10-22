@@ -116,6 +116,11 @@ def cups_block(id_, with_notes=False):
 </div>'''
 
 
+HOW_PHOTOS = '''<div class="how-photos">
+  <figure><img src="img/photos/grab-a-cup.webp" alt="A student takes a frozen Berry Bliss cup from a pink SWELL machine at school" width="900" height="1599" loading="lazy"><figcaption>Grab a frozen cup from the freezer.</figcaption></figure>
+  <figure><img src="img/photos/scan-to-blend.webp" alt="A frozen SWELL Berry Bliss cup with a Scan to blend QR code in front of the machine" width="900" height="1599" loading="lazy"><figcaption>Scan the code on the cup, then blend.</figcaption></figure>
+</div>'''
+
 PHOTO_BAND = '''<section class="photo-band" aria-label="Swell shakes and smoothies"><div class="wrap">
   <img data-line-show="shakes" src="img/menu/shakes.webp" alt="Swell Vanilla, Chocolate and Cookies &amp; Cream protein shakes" width="1672" height="941">
   <img data-line-show="smoothies" src="img/menu/smoothies.webp" alt="Swell Mango, Berry Bliss and Pina Colada protein smoothies" width="1536" height="1024">
@@ -123,17 +128,16 @@ PHOTO_BAND = '''<section class="photo-band" aria-label="Swell shakes and smoothi
 
 
 def hero_stage():
-    return f'''<div class="hero-stage">
-  {MACHINE}
-  <div class="dimline" aria-hidden="true"><span>76.2<br>in</span></div>
+    return '''<div class="hero-stage">
+  <img class="hero-machine" src="img/photos/machine.webp" alt="A pink SWELL vending machine with a glass freezer door full of frozen shake and smoothie cups, a touchscreen and a blending window" width="900" height="1599">
 </div>'''
 
 
 STEPS = '''<ol class="steps">
-  <li><h3>Pick</h3><p class="small">Choose a shake or smoothie and a size on the touchscreen.</p></li>
-  <li><h3>Tap</h3><p class="small">Pay with a card or phone. No cash, no app required.</p></li>
-  <li><h3>Blend</h3><p class="small">The machine blends frozen SWELL cubes into a fresh cup while you watch.</p></li>
-  <li><h3>Grab</h3><p class="small">Take it from the cup window, cold and thick, with a straw.</p></li>
+  <li><h3>Grab a cup</h3><p class="small">Open the freezer door and pick a frozen SWELL shake or smoothie cup.</p></li>
+  <li><h3>Scan it</h3><p class="small">Scan the QR code on the cup at the screen, then tap a card or phone to pay.</p></li>
+  <li><h3>Blend</h3><p class="small">Peel the lid, set the cup in the blending window and the machine blends it fresh.</p></li>
+  <li><h3>Sip</h3><p class="small">Take it out cold and thick, with a straw, and go.</p></li>
 </ol>'''
 
 SIZES = '''<div class="sizes">
@@ -156,10 +160,11 @@ SIZES = '''<div class="sizes">
 SPECS = '''<dl class="specs">
   <div><dt>Footprint</dt><dd>16.9 in wide × 34.3 in deep (428 × 872 mm). Fits through a standard doorway.</dd></div>
   <div><dt>Height</dt><dd>76.2 in (1,935 mm) on casters with leveling feet</dd></div>
-  <div><dt>Ordering</dt><dd>Portrait touchscreen, bottom edge at 51.5 in</dd></div>
+  <div><dt>Freezer</dt><dd>Glass-door freezer stocked with frozen SWELL shake and smoothie cups</dd></div>
+  <div><dt>Ordering</dt><dd>Touchscreen with QR scan, bottom edge at 51.5 in</dd></div>
   <div><dt>Cup window</dt><dd>36.4 in from the floor</dd></div>
   <div><dt>Payment</dt><dd>Tap-to-pay reader for cards and phone wallets at 30.6 in</dd></div>
-  <div><dt>Service</dt><dd>Locking double doors on the side for restocking and cleaning</dd></div>
+  <div><dt>Service</dt><dd>Locking freezer door for restocking and cleaning</dd></div>
   <div><dt>Wrap</dt><dd>SWELL and SWOLL graphics, or co-branded with your gym or school</dd></div>
   <div><dt>Power &amp; water</dt><dd>Confirmed at your free site survey before install</dd></div>
 </dl>'''
@@ -174,13 +179,13 @@ PROGRAMS = '''<div class="programs">
   <article class="prog feature">
     <p class="who">Operators and owners</p>
     <h3>Own it</h3>
-    <ul><li>Buy the machine and keep the sales</li><li>We supply SWELL cubes, cups and straws</li><li>Install, training and a service checklist</li><li>Remote sales and stock alerts</li></ul>
+    <ul><li>Buy the machine and keep the sales</li><li>We supply frozen SWELL cups, lids and straws</li><li>Install, training and a service checklist</li><li>Remote sales and stock alerts</li></ul>
     <p class="pay"><b>One-time purchase</b>Quoted by location and volume</p>
   </article>
   <article class="prog">
     <p class="who">Schools and rec centers</p>
     <h3>Lease it</h3>
-    <ul><li>Low monthly payment, no large purchase</li><li>Keep the sales after the lease</li><li>We supply cubes and handle repairs</li><li>Option to buy at the end</li></ul>
+    <ul><li>Low monthly payment, no large purchase</li><li>Keep the sales after the lease</li><li>We supply SWELL cups and handle repairs</li><li>Option to buy at the end</li></ul>
     <p class="pay"><b>Monthly lease</b>Quoted by term</p>
   </article>
 </div>'''
@@ -338,8 +343,9 @@ index = page('index.html', 'SWELL Vending', 'SWELL vending machines blend fresh 
 
 {PHOTO_BAND}
 
-<section class="band-card"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">How a cup gets made</p><h2>From frozen cube to fresh cup, <em>right at the machine.</em></h2></div>
+<section class="band-card" id="how"><div class="wrap">
+  <div class="sec-head"><p class="eyebrow">How it works</p><h2>Grab it. Scan it. <em>Blend it.</em></h2><p class="lead">Every SWELL machine is a freezer full of frozen shake and smoothie cups with a blender built in. Grab a cup, scan it, and it comes out fresh and cold.</p></div>
+  {HOW_PHOTOS}
   {STEPS}
 </div></section>
 
@@ -398,7 +404,7 @@ page('machine.html', 'The SWELL Machine', 'Specs, dimensions and programs for th
   <div class="hero-copy">
     <p class="eyebrow">The SWELL machine</p>
     <h1>A smoothie bar <em>on casters.</em></h1>
-    <p class="lead">One machine takes the order, takes the payment and blends a fresh protein smoothie or shake. We bring it in, set it up and keep it stocked with SWELL cubes.</p>
+    <p class="lead">A glass-door freezer full of frozen SWELL cups and a blender in one machine. Grab a cup, scan it, and it blends fresh. We bring it in, set it up and keep it stocked.</p>
     <div class="btn-row"><a class="btn arrow" href="#request">Request a site survey</a><a class="btn ghost" href="#programs">Compare programs</a></div>
   </div>
   {hero_stage()}
@@ -417,7 +423,7 @@ page('machine.html', 'The SWELL Machine', 'Specs, dimensions and programs for th
   <div class="sec-head"><p class="eyebrow">What comes with it</p><h2>Everything a cup needs.</h2></div>
   <div class="boosts">
     <div><b>Install</b><p class="small">Delivery, setup and a test run. Most installs take a single morning.</p></div>
-    <div><b>SWELL cubes</b><p class="small">Frozen, pre-portioned shake and smoothie cubes for all six flavors, plus cups and straws.</p></div>
+    <div><b>Frozen SWELL cups</b><p class="small">Pre-filled, frozen shake and smoothie cups for all six flavors, each with its own scan-to-blend code, plus straws.</p></div>
     <div><b>Cashless payments</b><p class="small">Cards and phone wallets through the tap-to-pay reader. Sales post daily.</p></div>
     <div><b>Your wrap</b><p class="small">Standard SWELL and SWOLL graphics, or a co-branded wrap with your logo and colors.</p></div>
   </div>
@@ -454,7 +460,7 @@ page('menu.html', 'SWELL Menu', 'Protein shakes and smoothies blended fresh in S
 <section class="page-hero"><div class="wrap">
   <p class="eyebrow">Menu</p>
   <h1>Dessert flavors, <em>real protein.</em></h1>
-  <p class="lead">Every cup is blended fresh from frozen SWELL cubes when you order. Choose a 16 oz SWELL with 30g of protein or a 24 oz SWOLL with 50g.</p>
+  <p class="lead">Every cup is packed frozen with real fruit and protein, then blended fresh in the machine when you scan it. Choose a 16 oz SWELL with 30g of protein or a 24 oz SWOLL with 50g.</p>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
@@ -508,7 +514,7 @@ page('about.html', 'About SWELL', 'SWELL started selling frozen smoothie cubes f
   <div class="prose">
     <p>SWELL began as frozen smoothie cubes, sold out of our own vending machines in high schools, gyms and hotels around Utah County.</p>
     <p>The machines taught us a lot. People bought the dessert flavors first. They wanted real protein in them. And nobody wanted to blend anything themselves between classes or on the way out of the gym.</p>
-    <p>So we built a machine that does the blending. It takes the order, takes the payment and makes a fresh protein smoothie or shake from SWELL cubes in front of you. SWOLL is the big one, with 50 grams of protein for after a hard lift.</p>
+    <p>So we built a machine that does the blending. It takes the order, takes the payment and blends a frozen SWELL cup into a fresh protein smoothie or shake in front of you. SWOLL is the big one, with 50 grams of protein for after a hard lift.</p>
     <p>Today we place, sell and lease SWELL machines to the places that asked for them first: gyms, schools, hotels and offices.</p>
   </div>
   <ol class="timeline">
@@ -538,7 +544,7 @@ page('about.html', 'About SWELL', 'SWELL started selling frozen smoothie cubes f
 FAQ_HOST = [
     ('How much space does a SWELL machine need?', 'The front is 16.9 inches wide and the machine is 34.3 inches deep and 76.2 inches tall. Leave room on the side for the service doors to open. It rolls in on casters and fits through a standard doorway.'),
     ('What does it need for power and water?', 'We confirm power and water at a free site survey before anything is installed, so there are no surprises on install day.'),
-    ('Who stocks and cleans it?', 'On the Host program our team restocks SWELL cubes, cups and straws and cleans the machine on a set schedule. Owners and lessees restock themselves with our cube supply and service checklist.'),
+    ('Who stocks and cleans it?', 'On the Host program our team restocks frozen SWELL cups, lids and straws and cleans the machine on a set schedule. Owners and lessees restock themselves with our cube supply and service checklist.'),
     ('How do we get paid?', 'Hosts receive a share of sales each month with a sales report. Owners and lessees keep their sales, which are deposited from the tap-to-pay reader.'),
     ('Can I buy a machine outright?', 'Yes. The Own program is a one-time purchase quoted by location and volume. We supply cubes and help with install and training.'),
     ('Can the machine carry our logo?', 'Yes. Machines ship with SWELL and SWOLL graphics, or we can print a co-branded wrap for your gym, school or company.'),
@@ -546,7 +552,7 @@ FAQ_HOST = [
 ]
 FAQ_DRINK = [
     ('What is the difference between SWELL and SWOLL?', 'SWELL is a 16 oz cup with 30g of protein. SWOLL is a 24 oz cup with 50g. Both come in every flavor and have collagen, colostrum and iron.'),
-    ('Is it really blended fresh?', 'Yes. The machine blends frozen SWELL cubes into your cup after you order, so nothing sits pre-made.'),
+    ('Is it really blended fresh?', 'Yes. Each cup sits frozen in the machine until you scan it. Then the machine blends it in front of you, so nothing sits pre-made.'),
     ('How do I pay?', 'Tap a card or phone wallet on the reader. The machine does not take cash.'),
     ('Is there dairy?', 'Yes. SWELL shakes and smoothies contain milk.'),
     ('Is SWELL a good fit if I am on a GLP-1?', 'Many people eating less still have a protein goal, and one cup gives you 30g or 50g without a full meal. SWELL is not a medical product, so check with your doctor about your own needs.'),
