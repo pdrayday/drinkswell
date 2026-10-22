@@ -487,3 +487,15 @@ html[data-line="smoothies"] { --surface: #f7e3a2; --surface-2: #faebb8; }
 .toast.on { opacity: 1; transform: translate(-50%, 0) scale(1); }
 .toast a { color: inherit; pointer-events: auto; }
 #find, #machines { scroll-margin-top: 84px; }
+
+/* real machine + how-it-works photos */
+.hero-machine { width: min(100%, 360px); height: auto; border-radius: 28px; box-shadow: 0 30px 60px -30px rgba(40, 10, 20, .45); }
+.hero-stage { place-items: center; }
+.how-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 860px; margin-bottom: clamp(32px, 4vw, 48px); }
+.how-photos figure { margin: 0; display: grid; gap: 10px; min-width: 0; }
+.how-photos img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 22px; }
+.how-photos figcaption { font-size: 14.5px; color: var(--muted); font-weight: 600; }
+@media (max-width: 760px) {
+  .how-photos { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 72%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
+  .how-photos figure { scroll-snap-align: start; }
+}
