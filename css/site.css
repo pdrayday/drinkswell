@@ -324,3 +324,71 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
 .note-chip { display: inline-block; font-size: 12.5px; color: var(--muted); padding: 6px 10px; border: 1px dashed var(--line); border-radius: 8px; }
 .band-ink .note-chip { color: #d7a9b6; border-color: rgba(251, 225, 232, .3); }
 .site-foot .small { color: #d7a9b6; }
+
+/* ---- smoothie line theme (header toggle), as on the main Swell site ---- */
+html[data-line="smoothies"] {
+  --paper: #fbf0cf; --blush: #f0d47e; --blush-2: #f7e3a2; --card: #fffaea;
+  --ink: #2a1f0e; --ink-2: #4a3818; --muted: #5c4a22; --rose: #8a5a10; --on-ink: #fdf2bf;
+  --line: rgba(42, 31, 14, .16);
+}
+html { transition: background-color .3s ease; }
+html[data-line="smoothies"] .top { background: rgba(251, 240, 207, .92); }
+html[data-line="smoothies"] .band-ink .lead, html[data-line="smoothies"] .band-ink .prose p { color: #ecdca6; }
+html[data-line="smoothies"] .band-ink .small, html[data-line="smoothies"] .site-foot .small, html[data-line="smoothies"] .site-foot .fine { color: #d9c88e; }
+html[data-line="smoothies"] .band-ink h2 em { color: var(--blush); }
+
+/* announcement bar */
+.announce { background: var(--ink); color: var(--on-ink); font-size: 13.5px; font-weight: 600; text-align: center; }
+.announce .wrap { padding-block: 9px; }
+.announce a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Shakes / Smoothies toggle */
+.linetog { display: inline-flex; padding: 3px; border-radius: 999px; border: 1.5px solid var(--ink); background: transparent; margin-left: 6px; }
+.linetog button { border: 0; background: transparent; padding: 8px 13px; border-radius: 999px; font: 700 13.5px/1 var(--body); color: var(--ink); cursor: pointer; }
+.linetog button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
+@media (max-width: 920px) { .linetog { margin-left: auto; } .menu-btn { margin-left: 8px; } }
+@media (max-width: 400px) { .linetog button { padding: 8px 10px; font-size: 12.5px; } .brand .tag { display: none; } }
+
+/* photo band */
+.photo-band { background: #050505; padding-block: 0; }
+.photo-band .wrap { padding-left: 0; padding-right: 0; max-width: 1400px; }
+.photo-band img { width: 100%; height: auto; max-height: 640px; object-fit: cover; }
+html[data-line="shakes"] [data-line-show="smoothies"], html[data-line="smoothies"] [data-line-show="shakes"] { display: none; }
+
+/* menu with real cup photos */
+.menu-lines { display: grid; gap: 8px; }
+.menu-lines .cups { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 2vw, 22px); }
+.menu-lines .cups li { justify-items: start; text-align: left; gap: 6px; }
+.menu-lines .photo { width: 100%; aspect-ratio: 557 / 941; border-radius: 20px; overflow: hidden; background: #050505; }
+.menu-lines .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.menu-lines li:hover .photo img { transform: scale(1.04); }
+.menu-lines .cups b { font-size: 22px; margin-top: 6px; }
+.menu-lines .sizes-note { margin-top: 18px; }
+html[data-line="smoothies"] .menu-lines .line[data-line-group="smoothies"] { order: -1; }
+@media (max-width: 560px) { .menu-lines .cups { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .menu-lines .cups b { font-size: 15px; } .menu-lines .cups span { font-size: 12.5px; } .menu-lines .photo { border-radius: 12px; } }
+
+/* sizes without photos */
+.size { grid-template-columns: minmax(0, 1fr); }
+
+/* social icons */
+.social { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.social a { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid currentColor; text-decoration: none; transition: transform .15s ease, background .15s ease; }
+.social a:hover { transform: translateY(-2px); }
+.drinkswell .social a:hover { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.fsocial { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(251, 225, 232, .16); }
+.fsocial .social a { opacity: 1; color: var(--on-ink); border-color: rgba(251, 225, 232, .4); }
+.fsocial .social a:hover { background: var(--blush); color: var(--ink); border-color: var(--blush); text-decoration: none; }
+.fsocial p { font-size: 15px; }
+.foot-brand .logo { width: 140px; }
+.drinkswell .sec-head { margin-bottom: 24px; }
+
+/* floating Find a machine bar */
+.mbar-nav { position: fixed; z-index: 40; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+.mbar { display: flex; align-items: center; gap: 12px; padding: 8px 10px 8px 8px; border-radius: 999px; background: var(--ink); color: var(--on-ink); text-decoration: none; box-shadow: 0 10px 30px rgba(42, 18, 26, .28); }
+.mbar i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--blush); color: var(--ink); }
+.mbar .p { display: grid; line-height: 1.2; font-size: 12.5px; }
+.mbar .p b { font-size: 14.5px; }
+.mbar .p span { opacity: .8; }
+.mbar .go { font: 700 13px/1 var(--body); padding: 9px 12px; border-radius: 999px; background: rgba(255, 255, 255, .12); }
+.site-foot { padding-bottom: 110px; }
+.site-foot .social { display: flex; gap: 10px; }
