@@ -52,7 +52,7 @@ def head(title, desc, path):
 <link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32.png"><link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">
 <link rel="preload" href="fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/playfair-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/source-serif-4-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 <script>try{{var l=localStorage.getItem("swell-line");if(l==="smoothies"||l==="shakes")document.documentElement.setAttribute("data-line",l)}}catch(e){{}}</script>
 </head>
@@ -319,8 +319,34 @@ def loc_li(l):
     return f'<li class="loc soon" data-type="{t}"><p class="type">{tl} · coming soon</p><h3>{city}</h3><address>Address coming soon<br>{cz}</address></li>'
 
 
+WM = '<svg class="wm" viewBox="0 0 2496 954" role="img" aria-label="Swell"><use href="#swell-logo"/></svg>'
+SKIP_TAGS = ('script', 'style', 'title', 'svg', 'option', 'textarea', 'select')
+
+
+def brand_words(markup):
+    """Swap the word Swell/SWELL in visible text for the real Swell logo artwork.
+    Leaves tags, attributes, scripts, form options and #drinkswell/@drinkswell alone."""
+    parts = re.split(r'(<[^>]+>)', markup)
+    depth = {t: 0 for t in SKIP_TAGS}
+    out = []
+    for part in parts:
+        if part.startswith('<'):
+            m = re.match(r'<(/?)([a-zA-Z0-9]+)', part)
+            if m:
+                tag = m.group(2).lower()
+                if tag in depth and not part.endswith('/>'):
+                    depth[tag] += -1 if m.group(1) else 1
+            out.append(part)
+            continue
+        if any(v > 0 for v in depth.values()):
+            out.append(part)
+            continue
+        out.append(re.sub(r'(?<![#@A-Za-z])(Swell|SWELL)(?![A-Za-z])', WM, part))
+    return ''.join(out)
+
+
 def page(name, title, desc, body):
-    out = head(title, desc, name) + header(name) + body + FOOT
+    out = head(title, desc, name) + brand_words(header(name) + body + FOOT)
     open(os.path.join(ROOT, name), 'w').write(out)
     return out
 
