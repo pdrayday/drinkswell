@@ -500,38 +500,34 @@ html[data-line="smoothies"] { --surface: #f7e3a2; --surface-2: #faebb8; }
   .how-photos figure { scroll-snap-align: start; }
 }
 
-/* ---- Swell script: the lettering that matches the Swell logo ---- */
-@font-face { font-family: "Great Vibes"; src: url(../fonts/great-vibes.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-:root { --script: "Great Vibes", "Snell Roundhand", "Apple Chancery", cursive; }
+/* ---- Swell lettering: swash Bodoni-style italic, like the Swell and New York logos ---- */
+@font-face { font-family: "Playfair Display"; src: url(../fonts/playfair-italic.woff2) format("woff2"); font-weight: 400 900; font-style: italic; font-display: swap; }
+:root { --script: "Playfair Display", "Bodoni 72", "Didot", Georgia, serif; }
 h1 em, h2 em, .sw, .script,
-.steps h3, .prog h3, .boosts b, .faq-group h3, .cups-label h3, .menu-lines .cups b, .thanks h3 span, .foot-brand p, .fhead h2 .sw, .mloc b, .pc h3, .photo-cta .sw {
-  font-family: var(--script); font-style: normal; font-weight: 400; letter-spacing: 0;
-  -webkit-text-stroke: .018em currentColor; paint-order: stroke fill;
+.steps h3, .prog h3, .boosts b, .faq-group h3, .cups-label h3, .menu-lines .cups b, .thanks h3 span, .foot-brand p, .fhead h2 .sw, .mloc b, .pc h3, .photo-cta .sw, .timeline b {
+  font-family: var(--script); font-style: italic; font-weight: 800; letter-spacing: -.01em;
+  font-feature-settings: "swsh" 1, "salt" 1, "liga" 1, "dlig" 1;
 }
-h1 em, h2 em, .sw { font-size: 1.22em; line-height: .9; padding-right: .06em; }
-h1 em { display: inline-block; margin-top: .06em; }
+h1 em, h2 em, .sw { font-size: 1.04em; line-height: 1; }
 .sw { color: inherit; }
 h1 .sw, h2 .sw { color: var(--ink); }
 .band-ink h2 .sw { color: var(--on-ink); }
-.steps h3 { font-size: clamp(38px, 3.6vw, 46px); line-height: 1; }
-.prog h3 { font-size: 46px; line-height: 1; }
-.boosts b { font-size: 34px; line-height: 1.05; }
-.faq-group h3 { font-size: 40px; }
-.cups-label h3 { font-size: 40px; }
-.menu-lines .cups b { font-size: 36px; line-height: 1; margin-top: 8px; }
-.thanks h3 span { font-size: 1.3em; }
-.foot-brand p.small { font-size: 26px; line-height: 1.25; color: var(--blush); max-width: 14em; -webkit-text-stroke: .01em currentColor; }
-.mloc b { font-size: 34px; line-height: 1; }
-.pc h3 { font-size: 26px; line-height: 1.05; }
-.fhead h2 .sw { font-size: 1.3em; }
+.steps h3 { font-size: clamp(26px, 2.4vw, 32px); line-height: 1.05; }
+.prog h3 { font-size: 34px; line-height: 1; }
+.boosts b { font-size: 24px; line-height: 1.1; }
+.faq-group h3 { font-size: 28px; }
+.cups-label h3 { font-size: 28px; }
+.menu-lines .cups b { font-size: 26px; line-height: 1.05; margin-top: 8px; }
+.foot-brand p.small { font-size: 19px; line-height: 1.35; color: var(--blush); max-width: 16em; font-weight: 600; }
+.mloc b { font-size: 24px; line-height: 1.05; }
+.pc h3 { font-size: 20px; line-height: 1.1; }
+.timeline b { font-size: 24px; line-height: 1.1; }
 /* "See the menu" over the drink photos */
 .photo-link { position: relative; display: block; color: #fff; text-decoration: none; }
 .photo-cta { position: absolute; z-index: 2; right: clamp(16px, 3vw, 40px); bottom: clamp(14px, 3vw, 36px); font: 700 15px/1 var(--body); padding: 12px 18px; border-radius: 999px; background: rgba(255, 255, 255, .92); color: var(--ink); display: inline-flex; align-items: baseline; gap: 6px; transition: transform .2s ease; }
-.photo-cta .sw { font-size: 30px; line-height: .6; color: var(--rose); }
+.photo-cta .sw { font-size: 18px; line-height: 1; color: var(--rose); }
 .photo-link:hover .photo-cta { transform: translateY(-2px); }
 @media (max-width: 560px) {
-  .menu-lines .cups b { font-size: 24px; }
-  .mloc b { font-size: 28px; }
-  .prog h3 { font-size: 40px; }
+  .menu-lines .cups b { font-size: 18px; }
+  .mloc b { font-size: 21px; }
 }
-.timeline b { font-family: var(--script); font-weight: 400; font-size: 36px; line-height: 1; -webkit-text-stroke: .018em currentColor; paint-order: stroke fill; }
