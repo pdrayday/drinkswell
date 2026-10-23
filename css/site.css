@@ -52,7 +52,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.04; l
 h1 { font-size: clamp(42px, 6.4vw, 82px); }
 h2 { font-size: clamp(32px, 4.2vw, 52px); }
 h3 { font-size: clamp(21px, 2vw, 25px); letter-spacing: -.01em; }
-h1 em, h2 em { font-style: italic; font-weight: 600; color: var(--rose); }
+h1 em, h2 em { font-style: italic; font-weight: 700; color: var(--rose); }
 .band-ink h2 em { color: var(--blush); }
 p { margin: 0; }
 .lead { font-size: clamp(17px, 1.6vw, 20px); color: var(--muted); max-width: 36em; }
@@ -500,15 +500,13 @@ html[data-line="smoothies"] { --surface: #f7e3a2; --surface-2: #faebb8; }
   .how-photos figure { scroll-snap-align: start; }
 }
 
-/* ---- Swell lettering: swash Bodoni-style italic, like the Swell and New York logos ---- */
-@font-face { font-family: "Playfair Display"; src: url(../fonts/playfair-italic.woff2) format("woff2"); font-weight: 400 900; font-style: italic; font-display: swap; }
-:root { --script: "Playfair Display", "Bodoni 72", "Didot", Georgia, serif; }
+/* ---- Swell accent lettering: Source Serif 4 Italic, as on the main Swell site ("works out.") ---- */
+:root { --script: "Source Serif 4", Georgia, "Times New Roman", serif; }
 h1 em, h2 em, .sw, .script,
 .steps h3, .prog h3, .boosts b, .faq-group h3, .cups-label h3, .menu-lines .cups b, .thanks h3 span, .foot-brand p, .fhead h2 .sw, .mloc b, .pc h3, .photo-cta .sw, .timeline b {
-  font-family: var(--script); font-style: italic; font-weight: 800; letter-spacing: -.01em;
-  font-feature-settings: "swsh" 1, "salt" 1, "liga" 1, "dlig" 1;
+  font-family: var(--script); font-style: italic; font-weight: 700; letter-spacing: -.015em;
 }
-h1 em, h2 em, .sw { font-size: 1.04em; line-height: 1; }
+h1 em, h2 em, .sw { font-size: 1em; line-height: inherit; }
 .sw { color: inherit; }
 h1 .sw, h2 .sw { color: var(--ink); }
 .band-ink h2 .sw { color: var(--on-ink); }
@@ -531,3 +529,10 @@ h1 .sw, h2 .sw { color: var(--ink); }
   .menu-lines .cups b { font-size: 18px; }
   .mloc b { font-size: 21px; }
 }
+
+/* ---- The real Swell logo wherever the word Swell appears ---- */
+.wm { display: inline-block; height: 1.3em; width: auto; aspect-ratio: 2496 / 954; vertical-align: -.36em; fill: currentColor; margin: 0 .03em; overflow: visible; font-style: normal; }
+h1 .wm, h2 .wm { height: 1.18em; vertical-align: -.3em; margin: 0 .05em; }
+.eyebrow .wm { height: 2em; vertical-align: -.62em; }
+.sw .wm { height: 1.14em; }
+.foot-brand .wm, .site-foot .wm { color: inherit; }
