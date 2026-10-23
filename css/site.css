@@ -325,17 +325,8 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
 .band-ink .note-chip { color: #d7a9b6; border-color: rgba(251, 225, 232, .3); }
 .site-foot .small { color: #d7a9b6; }
 
-/* ---- smoothie line theme (header toggle), as on the main Swell site ---- */
-html[data-line="smoothies"] {
-  --paper: #fbf0cf; --blush: #f0d47e; --blush-2: #f7e3a2; --card: #fffaea;
-  --ink: #2a1f0e; --ink-2: #4a3818; --muted: #5c4a22; --rose: #8a5a10; --on-ink: #fdf2bf;
-  --line: rgba(42, 31, 14, .16);
-}
+/* ---- Shakes / Smoothies switch: changes the drink photos and menu order only; colors stay pink ---- */
 html { transition: background-color .3s ease; }
-html[data-line="smoothies"] .top { background: rgba(251, 240, 207, .92); }
-html[data-line="smoothies"] .band-ink .lead, html[data-line="smoothies"] .band-ink .prose p { color: #ecdca6; }
-html[data-line="smoothies"] .band-ink .small, html[data-line="smoothies"] .site-foot .small, html[data-line="smoothies"] .site-foot .fine { color: #d9c88e; }
-html[data-line="smoothies"] .band-ink h2 em { color: var(--blush); }
 
 /* announcement bar */
 .announce { background: var(--ink); color: var(--on-ink); font-size: 13.5px; font-weight: 600; text-align: center; }
@@ -387,7 +378,6 @@ html[data-line="smoothies"] .menu-lines .line[data-line-group="smoothies"] { ord
 
 /* ---- Machine finder + Find a machine bar, ported from the main Swell site ---- */
 :root { --bg: var(--paper); --surface: #f2c9d3; --surface-2: #f7d6de; --fg: var(--ink); --em: var(--rose); --spring: cubic-bezier(.34, 1.56, .64, 1); }
-html[data-line="smoothies"] { --surface: #f7e3a2; --surface-2: #faebb8; }
 .press { transition: transform .35s var(--spring); -webkit-tap-highlight-color: transparent; }
 .press:active { transform: scale(.94); transition-duration: .08s; }
 .btn.alt { background: transparent; color: var(--fg); border-color: transparent; box-shadow: inset 0 0 0 1.5px var(--line); }
@@ -536,3 +526,12 @@ h1 .wm, h2 .wm { height: 1.18em; vertical-align: -.3em; margin: 0 .05em; }
 .eyebrow .wm { height: 2em; vertical-align: -.62em; }
 .sw .wm { height: 1.14em; }
 .foot-brand .wm, .site-foot .wm { color: inherit; }
+
+/* keep sentences in one piece when the logo sits inside them */
+.prog li { display: block; position: relative; padding-left: 26px; }
+.prog li::before { position: absolute; left: 2px; top: 0; }
+.faq summary .q { flex: 1; min-width: 0; }
+.menu-lines .cups li, .cups li { align-content: start; }
+.wm { height: 1.2em; vertical-align: -.32em; }
+h1 .wm, h2 .wm { height: 1.18em; vertical-align: -.3em; }
+.eyebrow .wm { height: 2em; vertical-align: -.62em; }
