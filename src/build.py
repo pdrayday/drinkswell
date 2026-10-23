@@ -201,7 +201,7 @@ ESTIMATOR = '''<div class="est" id="est">
     <div class="range"><label for="est-price">Average price per cup <output id="est-price-o" for="est-price">$8.50</output></label><input id="est-price" type="range" min="5.99" max="11.99" step="0.25" value="8.49"></div>
     <div class="range"><label for="est-days">Days open per month <output id="est-days-o" for="est-days">26</output></label><input id="est-days" type="range" min="10" max="31" step="1" value="26"></div>
     <div class="range"><label for="est-share">Your share of sales <output id="est-share-o" for="est-share">15%</output></label><input id="est-share" type="range" min="5" max="100" step="5" value="15"></div>
-    <p class="small">Hosts earn a revenue share. Owners keep 100% of sales, minus SWELL cubes and cups.</p>
+    <p class="small">Hosts earn a revenue share. Owners keep 100% of sales, minus the cost of frozen SWELL cups.</p>
   </form>
   <div class="est-out" aria-live="polite">
     <p class="k">Monthly sales at the machine</p>
@@ -455,7 +455,7 @@ page('machine.html', 'The SWELL Machine', 'Specs, dimensions and programs for th
       <tbody>
         <tr><th scope="row">Upfront cost</th><td>None</td><td>Machine purchase</td><td>None or small deposit</td></tr>
         <tr><th scope="row">Who keeps sales</th><td>SWELL, you get a share</td><td>You</td><td>You</td></tr>
-        <tr><th scope="row">Restocking</th><td>Our team</td><td>You, with our cube supply</td><td>You, with our cube supply</td></tr>
+        <tr><th scope="row">Restocking</th><td>Our team</td><td>You, with our SWELL cup supply</td><td>You, with our SWELL cup supply</td></tr>
         <tr><th scope="row">Repairs</th><td>Included</td><td>Warranty, then service plan</td><td>Included during lease</td></tr>
         <tr><th scope="row">Best for</th><td>Gyms and hotels that want zero work</td><td>Operators with several sites</td><td>Schools and rec centers on a budget</td></tr>
       </tbody>
@@ -560,9 +560,9 @@ page('about.html', 'About SWELL', 'SWELL started selling frozen smoothie cubes f
 FAQ_HOST = [
     ('How much space does a SWELL machine need?', 'The front is 16.9 inches wide and the machine is 34.3 inches deep and 76.2 inches tall. Leave room on the side for the service doors to open. It rolls in on casters and fits through a standard doorway.'),
     ('What does it need for power and water?', 'We confirm power and water at a free site survey before anything is installed, so there are no surprises on install day.'),
-    ('Who stocks and cleans it?', 'On the Host program our team restocks frozen SWELL cups, lids and straws and cleans the machine on a set schedule. Owners and lessees restock themselves with our cube supply and service checklist.'),
+    ('Who stocks and cleans it?', 'On the Host program our team restocks frozen SWELL cups, lids and straws and cleans the machine on a set schedule. Owners and lessees restock themselves with our SWELL cup supply and service checklist.'),
     ('How do we get paid?', 'Hosts receive a share of sales each month with a sales report. Owners and lessees keep their sales, which are deposited from the tap-to-pay reader.'),
-    ('Can I buy a machine outright?', 'Yes. The Own program is a one-time purchase quoted by location and volume. We supply cubes and help with install and training.'),
+    ('Can I buy a machine outright?', 'Yes. The Own program is a one-time purchase quoted by location and volume. We supply frozen SWELL cups and help with install and training.'),
     ('Can the machine carry our logo?', 'Yes. Machines ship with SWELL and SWOLL graphics, or we can print a co-branded wrap for your gym, school or company.'),
     ('Do you install outside Utah County?', 'We are starting in Utah County and expanding through Utah next. Send a request either way and we will tell you when we reach your area.'),
 ]
@@ -576,7 +576,7 @@ FAQ_DRINK = [
 
 
 def faq_items(items):
-    return ''.join(f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>' for q, a in items)
+    return ''.join(f'<details><summary><span class="q">{html.escape(q)}</span></summary><p>{html.escape(a)}</p></details>' for q, a in items)
 
 
 page('faq.html', 'SWELL FAQ', 'Answers about hosting, buying and leasing a SWELL protein smoothie vending machine, and about SWELL and SWOLL cups.', f'''
