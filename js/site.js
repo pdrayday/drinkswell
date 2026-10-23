@@ -107,7 +107,6 @@
   var setLine = function (l, save) {
     root.setAttribute('data-line', l);
     $$('[data-line-btn]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-line-btn') === l)); });
-    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', l === 'smoothies' ? '#fbf0cf' : '#f8e7eb');
     if (save) { try { localStorage.setItem('swell-line', l); } catch (e) {} }
   };
   setLine(root.getAttribute('data-line') || 'shakes', false);
