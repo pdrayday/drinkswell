@@ -167,7 +167,7 @@
     function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
     function popupHtml(m) {
       var d = you ? '<p class="pv">' + miles(you, m).toFixed(1) + ' mi away · ' + esc(m.venue) + '</p>' : '<p class="pv">' + esc(m.venue) + ' · Shakes and smoothies</p>';
-      return '<div class="pc"><img src="' + m.photo + '" alt=""><div><h3>Swell Vending — ' + esc(m.city) + '</h3><p class="pa">' + esc(m.address) + '<br>' + esc(m.csz) + '</p>' + d +
+      return '<div class="pc"><img src="' + m.photo + '" alt=""><div><h3><svg class="wm" viewBox="0 0 2496 954" role="img" aria-label="Swell"><use href="#swell-logo"/></svg> Vending, ' + esc(m.city) + '</h3><p class="pa">' + esc(m.address) + '<br>' + esc(m.csz) + '</p>' + d +
         '<button type="button" class="sethome" data-sethome="' + m.id + '">Make this my go-to machine</button>' +
         '<a class="dir" href="' + dirUrl(m) + '" target="_blank" rel="noopener">Directions <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></a></div></div>';
     }
