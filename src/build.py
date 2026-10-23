@@ -52,6 +52,7 @@ def head(title, desc, path):
 <link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32.png"><link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">
 <link rel="preload" href="fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/instrument-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/great-vibes.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 <script>try{{var l=localStorage.getItem("swell-line");if(l==="smoothies"||l==="shakes")document.documentElement.setAttribute("data-line",l)}}catch(e){{}}</script>
 </head>
@@ -79,7 +80,7 @@ FOOT = f'''</main>
   <div class="cols">
     <div class="foot-brand">
       <a href="index.html" aria-label="Swell home">{LOGO}</a>
-      <p class="small">Protein shakes and smoothies, blended fresh in SWELL machines. Made in Utah County.</p>
+      <p class="small">Protein shakes and smoothies, blended fresh. Made in Utah County.</p>
     </div>
     <div><h4>Machines</h4><ul><li><a href="machine.html">The machine</a></li><li><a href="machine.html#programs">Host, own or lease</a></li><li><a href="machine.html#estimate">Earnings estimate</a></li><li><a href="machine.html#request">Request a site survey</a></li></ul></div>
     <div><h4>Swell</h4><ul><li><a href="menu.html">Menu</a></li><li><a href="locations.html">Find a machine</a></li><li><a href="about.html">About</a></li></ul></div>
@@ -122,8 +123,9 @@ HOW_PHOTOS = '''<div class="how-photos">
 </div>'''
 
 PHOTO_BAND = '''<section class="photo-band" aria-label="Swell shakes and smoothies"><div class="wrap">
+  <a class="photo-link" href="menu.html"><span class="photo-cta">See the <span class="sw">menu</span> →</span>
   <img data-line-show="shakes" src="img/menu/shakes.webp" alt="Swell Vanilla, Chocolate and Cookies &amp; Cream protein shakes" width="1672" height="941">
-  <img data-line-show="smoothies" src="img/menu/smoothies.webp" alt="Swell Mango, Berry Bliss and Pina Colada protein smoothies" width="1536" height="1024">
+  <img data-line-show="smoothies" src="img/menu/smoothies.webp" alt="Swell Mango, Berry Bliss and Pina Colada protein smoothies" width="1536" height="1024"></a>
 </div></section>'''
 
 
@@ -219,7 +221,7 @@ def request_block(heading='Get a SWELL machine', sub='Tell us about your spot. W
     return f'''<section class="band-ink" id="request"><div class="wrap req">
   <div class="sec-head">
     <p class="eyebrow">Request a site survey</p>
-    <h2>{heading}</h2>
+    <h2>Get a <span class="sw">Swell</span> machine</h2>
     <p class="lead">{sub}</p>
     <ul class="small" style="margin:6px 0 0;padding-left:18px;display:grid;gap:6px">
       <li>Survey and quote within one week</li>
@@ -277,7 +279,7 @@ def finder_section(pad_top='10px'):
 <link rel="stylesheet" href="vendor/maplibre-gl.css">
 <div class="finder2">
   <div class="fside">
-    <div class="fhead"><h2>Find a Swell</h2><p>Utah County · <span id="fcount">{len(MDATA)}</span> machines</p></div>
+    <div class="fhead"><h2>Find a <span class="sw">Swell</span></h2><p>Utah County · <span id="fcount">{len(MDATA)}</span> machines</p></div>
     <div class="ffilters filters" role="group" aria-label="Location type"><button type="button" class="press" aria-pressed="true" data-mf="all">All</button><button type="button" class="press" aria-pressed="false" data-mf="gym">Gyms</button><button type="button" class="press" aria-pressed="false" data-mf="school">Schools</button><button type="button" class="press" aria-pressed="false" data-mf="hotel">Hotels</button><button type="button" class="press" aria-pressed="false" data-mf="shopping">Shopping</button></div>
     <button type="button" class="btn sm alt flocate" id="flocate2"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Sort by distance from me</button>
     <div class="flist" id="flist">{cards}</div>
@@ -349,18 +351,6 @@ index = page('index.html', 'SWELL Vending', 'SWELL vending machines blend fresh 
   {STEPS}
 </div></section>
 
-<section id="menu"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">The menu</p><h2>Three shakes. <em>Three smoothies.</em></h2><p class="lead">Milkshake flavors and fruit smoothies, blended fresh in every machine.</p></div>
-  {cups_block('home-cups')}
-  <p style="margin-top:28px"><a class="btn ghost arrow" href="menu.html">Full menu</a></p>
-</div></section>
-
-<section class="band-blush" id="sizes"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">SWELL or SWOLL</p><h2>Pick your protein.</h2></div>
-  {SIZES}
-  <p class="small" style="margin-top:16px">Prices are sample pricing until launch. Locations can set their own.</p>
-</div></section>
-
 <section class="band-ink" id="machine"><div class="wrap mach">
   <div class="mach-fig">{DIMS}</div>
   <div>
@@ -373,12 +363,12 @@ index = page('index.html', 'SWELL Vending', 'SWELL vending machines blend fresh 
 </div></section>
 
 <section><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">Built for busy places</p><h2>Anywhere people work out, study or travel.</h2><p class="lead">Our first machines went into high schools, gyms and hotels around Utah County. These are the spots that sell the most cups.</p></div>
+  <div class="sec-head"><p class="eyebrow">Built for busy places</p><h2>Anywhere people work out, <em>study or travel.</em></h2><p class="lead">Our first machines went into high schools, gyms and hotels around Utah County. These are the spots that sell the most cups.</p></div>
   {PLACES_HTML}
 </div></section>
 
 <section class="band-card" id="programs"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">Ways to get one</p><h2>Host it, own it <em>or lease it.</em></h2><p class="lead">Pick the setup that fits your building. Every option includes install, SWELL cubes and our help keeping it running.</p></div>
+  <div class="sec-head"><p class="eyebrow">Ways to get one</p><h2>Host it, own it <em>or lease it.</em></h2><p class="lead">Pick the setup that fits your building. Every option includes install, frozen SWELL cups and our help keeping it running.</p></div>
   {PROGRAMS}
   <p class="note-chip" style="margin-top:18px">Terms are set per location. Ask for a quote.</p>
 </div></section>
@@ -388,11 +378,11 @@ index = page('index.html', 'SWELL Vending', 'SWELL vending machines blend fresh 
   {ESTIMATOR}
 </div></section>
 
-<section class="mach-intro" id="machines"><div class="wrap"><div class="sec-head"><p class="eyebrow">Already blending</p><h2>Find a Swell machine</h2><p class="lead">You'll find SWELL machines in gyms, high schools, hotels and shopping centers around Utah County, blending shakes and smoothies to order.</p></div></div></section>
+<section class="mach-intro" id="machines"><div class="wrap"><div class="sec-head"><p class="eyebrow">Already blending</p><h2>Find a <span class="sw">Swell</span> machine</h2><p class="lead">You'll find SWELL machines in gyms, high schools, hotels and shopping centers around Utah County, blending shakes and smoothies to order.</p></div></div></section>
 {finder_section()}
 
 <section class="drinkswell"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">#drinkswell</p><h2>Post your Swell.</h2><p class="lead">Gym bags, school hallways, the line at the machine. Tag <b>@drinkswell</b> and use <b>#drinkswell</b>, and your post could end up here.</p></div>
+  <div class="sec-head"><p class="eyebrow">#drinkswell</p><h2>Post your <span class="sw">Swell.</span></h2><p class="lead">Gym bags, school hallways, the line at the machine. Tag <b>@drinkswell</b> and use <b>#drinkswell</b>, and your post could end up here.</p></div>
   {SOCIAL_HTML}
 </div></section>
 
@@ -420,7 +410,7 @@ page('machine.html', 'The SWELL Machine', 'Specs, dimensions and programs for th
 </div></section>
 
 <section class="band-card"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">What comes with it</p><h2>Everything a cup needs.</h2></div>
+  <div class="sec-head"><p class="eyebrow">What comes with it</p><h2>Everything <em>a cup needs.</em></h2></div>
   <div class="boosts">
     <div><b>Install</b><p class="small">Delivery, setup and a test run. Most installs take a single morning.</p></div>
     <div><b>Frozen SWELL cups</b><p class="small">Pre-filled, frozen shake and smoothie cups for all six flavors, each with its own scan-to-blend code, plus straws.</p></div>
@@ -449,7 +439,7 @@ page('machine.html', 'The SWELL Machine', 'Specs, dimensions and programs for th
 </div></section>
 
 <section class="band-blush" id="estimate"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">Earnings estimate</p><h2>Run your numbers.</h2></div>
+  <div class="sec-head"><p class="eyebrow">Earnings estimate</p><h2>Run <em>your numbers.</em></h2></div>
   {ESTIMATOR}
 </div></section>
 
@@ -468,12 +458,12 @@ page('menu.html', 'SWELL Menu', 'Protein shakes and smoothies blended fresh in S
 </div></section>
 
 <section class="band-blush" id="sizes"><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">Sizes</p><h2>SWELL or SWOLL.</h2></div>
+  <div class="sec-head"><p class="eyebrow">Sizes</p><h2><span class="sw">Swell</span> or <span class="swoll-word">SWOLL</span>.</h2></div>
   {SIZES}
 </div></section>
 
 <section><div class="wrap">
-  <div class="sec-head"><p class="eyebrow">In every cup</p><h2>More than protein.</h2><p class="lead">Every SWELL and SWOLL, shakes and smoothies, also has collagen peptides, colostrum and iron.</p></div>
+  <div class="sec-head"><p class="eyebrow">In every cup</p><h2>More than <em>protein.</em></h2><p class="lead">Every SWELL and SWOLL, shakes and smoothies, also has collagen peptides, colostrum and iron.</p></div>
   <div class="boosts">
     <div><b>30g or 50g protein</b><p class="small">30g in a SWELL and 50g in a SWOLL, enough for a post-workout shake or a light meal.</p></div>
     <div><b>Collagen peptides</b><p class="small">Hydrolyzed collagen that supports healthy skin, hair, nails and joints.* No taste, no grit.</p></div>
@@ -484,7 +474,7 @@ page('menu.html', 'SWELL Menu', 'Protein shakes and smoothies blended fresh in S
 </div></section>
 
 <section class="band-ink cta-band"><div class="wrap">
-  <h2>Want this menu in your building?</h2>
+  <h2>Want this menu <em>in your building?</em></h2>
   <div class="btn-row"><a class="btn arrow" href="machine.html#request">Get a SWELL machine</a><a class="btn ghost" href="locations.html">Find a machine</a></div>
 </div></section>
 ''')
@@ -492,14 +482,14 @@ page('menu.html', 'SWELL Menu', 'Protein shakes and smoothies blended fresh in S
 page('locations.html', 'Find a SWELL Machine', 'SWELL protein smoothie vending machines in gyms, schools, hotels and shopping centers around Utah County, Utah.', f'''
 <section class="page-hero"><div class="wrap">
   <p class="eyebrow">Locations</p>
-  <h1>Find a SWELL machine.</h1>
+  <h1>Find a <span class="sw">Swell</span> machine.</h1>
   <p class="lead">Machines in gyms, high schools, hotels and shopping centers around Utah County, with more on the way.</p>
 </div></section>
 
 {finder_section('0')}
 
 <section class="band-ink cta-band"><div class="wrap">
-  <h2>Don't see one near you?</h2>
+  <h2>Don't see one <em>near you?</em></h2>
   <div class="btn-row"><a class="btn arrow" href="machine.html#request">Request a machine</a><a class="btn ghost" href="refer.html">Refer a location</a></div>
 </div></section>
 ''')
@@ -536,7 +526,7 @@ page('about.html', 'About SWELL', 'SWELL started selling frozen smoothie cubes f
 </div></section>
 
 <section class="band-ink cta-band"><div class="wrap">
-  <h2>Bring SWELL to your building.</h2>
+  <h2>Bring <span class="sw">Swell</span> to your building.</h2>
   <div class="btn-row"><a class="btn arrow" href="machine.html#request">Get a SWELL machine</a></div>
 </div></section>
 ''')
@@ -566,14 +556,14 @@ def faq_items(items):
 page('faq.html', 'SWELL FAQ', 'Answers about hosting, buying and leasing a SWELL protein smoothie vending machine, and about SWELL and SWOLL cups.', f'''
 <section class="page-hero"><div class="wrap">
   <p class="eyebrow">FAQ</p>
-  <h1>Questions, answered.</h1>
+  <h1>Questions, <em>answered.</em></h1>
 </div></section>
 <section style="padding-top:0"><div class="wrap">
   <div class="faq-group mt-0"><h3>For gyms, schools and businesses</h3><div class="faq">{faq_items(FAQ_HOST)}</div></div>
   <div class="faq-group"><h3>About the drinks</h3><div class="faq">{faq_items(FAQ_DRINK)}</div></div>
 </div></section>
 <section class="band-ink cta-band"><div class="wrap">
-  <h2>Still have a question?</h2>
+  <h2>Still have <em>a question?</em></h2>
   <div class="btn-row"><a class="btn arrow" href="machine.html#request">Ask us</a></div>
 </div></section>
 ''')
@@ -582,7 +572,7 @@ ref_opts = ''.join(f'<option>{t}</option>' for t in TYPES)
 page('refer.html', 'Refer a SWELL Location', 'Know a gym, school or hotel that should have a SWELL machine? Refer it and get paid when the machine goes live.', f'''
 <section class="page-hero"><div class="wrap">
   <p class="eyebrow">Referral program</p>
-  <h1>Know a spot that needs <em>a SWELL?</em></h1>
+  <h1>Know a spot that needs <em>a Swell?</em></h1>
   <p class="lead">Coaches, students, members and front-desk staff know which buildings need a protein option. Tell us where, and we pay you when the machine goes live.</p>
 </div></section>
 <section style="padding-top:0"><div class="wrap">
@@ -595,7 +585,7 @@ page('refer.html', 'Refer a SWELL Location', 'Know a gym, school or hotel that s
   <p class="note-chip" style="margin-top:18px">Sample referral reward for layout. Final terms set before launch.</p>
 </div></section>
 <section class="band-ink" id="refer"><div class="wrap req">
-  <div class="sec-head"><p class="eyebrow">Refer a location</p><h2>Send us a spot.</h2><p class="lead">It takes a minute. You do not need to know the owner.</p></div>
+  <div class="sec-head"><p class="eyebrow">Refer a location</p><h2>Send us <em>a spot.</em></h2><p class="lead">It takes a minute. You do not need to know the owner.</p></div>
   <div>
     <form class="form" data-lead="ref-thanks" novalidate>
       <div class="field"><label for="r-name">Your name *</label><input id="r-name" name="name" autocomplete="name" required></div>
